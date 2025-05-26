@@ -12,6 +12,10 @@ import {configProvider} from "./app.config.provider";
           cache: true
       }),
       // @todo: Добавьте раздачу статических файлов из public
+       ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'public'),
+      renderPath: '/content/afisha/',
+    }),
   ],
   controllers: [],
   providers: [configProvider],
