@@ -25,9 +25,9 @@ export class OrderService {
         throw new BadRequestException(`Место уже занято`);
       }
       await this.filmsRepository.takingSeat(
-        ticket.film,
-        scheduleIndex.toString(),
-        place,
+            ticket.film,
+            scheduleIndex.toString(),
+            place,
       );
     }
     return { total: tickets.length, items: tickets };
