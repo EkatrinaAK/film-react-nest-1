@@ -5,11 +5,15 @@ import { FilmsRepository } from '../repository/films.repository';
 export class FilmsService {
   constructor(private readonly filmsRepository: FilmsRepository) {}
 
-  async getAllFilms() {
-    return this.filmsRepository.findAllFilms();
+   async getAll() {
+    return this.filmsRepository.findAll();
   }
 
   async getScheduleFilm(id: string) {
-    return await this.filmsRepository.findAllSchedulesById(id);
+    const film = await this.filmsRepository.findById(id);
+    return {
+      total: film.schedule.length,
+      items: film.schedule,
+    };
   }
 }
