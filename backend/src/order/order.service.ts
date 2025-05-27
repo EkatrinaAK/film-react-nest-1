@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, NotFoundException} from '@nestjs/common';
 import { FilmsRepository } from '../repository/films.repository';
 import { GetOrderDTO, GetTicketDTO } from './dto/order.dto';
 
@@ -8,22 +8,31 @@ export class OrderService {
 
     async createOrder(
     orderData: GetOrderDTO,
-  ): Promise<{ items: GetTicketDTO[]; total: number }> {
+  ){
     const tickets = orderData.tickets;
-    for (const ticket of tickets) {
-      await this.filmsRepository.findSchedulesById(ticket.film, ticket.session);
-      const place = `${ticket.row}:${ticket.seat}`;
-      if (
-        await this.filmsRepository.checkPlace(
-          ticket.film,
-          ticket.session,
-          place,
-        )
-      ) {
-        throw new BadRequestException(`Место ${place} уже забронировано`);
+    for (const ticket of tickets)  {
+      const film = await this.filmsRepository.findById(ticket.film);
+        const scheduleIndex = film.schedule.findIndex(
+        (s) => s.id === ticket.session,
+      );
+      if (scheduleIndex === -1) {
+        throw new NotFoundException(
+          `Неn расписания с id '${ticket.session}'`,
+        );
       }
-      this.filmsRepository.updatePlaces(ticket.film, ticket.session, place);
+      const place = `${ticket.row}:${ticket.seat}`;
+      if (film.schedule[scheduleIndex].taken.includes(place)) {
+        throw new BadRequestException(`Место уже занято`);
+      }
+      this.filmsRepository.takingSeat(
+        ticket.film,
+        scheduleIndex.toString(),
+        place,
+      );
     }
-    return { items: tickets, total: tickets.length };
+    return { total: tickets.length, items: tickets };
+
+    }
   }
-}
+   
+    
