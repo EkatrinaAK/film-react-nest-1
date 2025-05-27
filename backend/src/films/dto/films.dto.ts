@@ -66,4 +66,3 @@ export class GetFilmDTO {
   @IsNotEmpty()
   schedule: GetScheduleDTO[];
 }
-

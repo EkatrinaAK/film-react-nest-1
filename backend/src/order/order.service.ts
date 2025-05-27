@@ -1,24 +1,24 @@
-import { Injectable, BadRequestException, NotFoundException} from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { FilmsRepository } from '../repository/films.repository';
-import { GetOrderDTO, GetTicketDTO } from './dto/order.dto';
+import { GetOrderDTO } from './dto/order.dto';
 
 @Injectable()
 export class OrderService {
-    constructor(private readonly filmsRepository: FilmsRepository) {}
+  constructor(private readonly filmsRepository: FilmsRepository) {}
 
-    async createOrder(
-    orderData: GetOrderDTO,
-  ){
+  async createOrder(orderData: GetOrderDTO) {
     const tickets = orderData.tickets;
-    for (const ticket of tickets)  {
+    for (const ticket of tickets) {
       const film = await this.filmsRepository.findById(ticket.film);
-        const scheduleIndex = film.schedule.findIndex(
+      const scheduleIndex = film.schedule.findIndex(
         (s) => s.id === ticket.session,
       );
       if (scheduleIndex === -1) {
-        throw new NotFoundException(
-          `Неn расписания с id '${ticket.session}'`,
-        );
+        throw new NotFoundException(`Неn расписания с id '${ticket.session}'`);
       }
       const place = `${ticket.row}:${ticket.seat}`;
       if (film.schedule[scheduleIndex].taken.includes(place)) {
@@ -31,8 +31,5 @@ export class OrderService {
       );
     }
     return { total: tickets.length, items: tickets };
-
-    }
   }
-   
-    
+}

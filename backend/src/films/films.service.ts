@@ -5,7 +5,7 @@ import { FilmsRepository } from '../repository/films.repository';
 export class FilmsService {
   constructor(private readonly filmsRepository: FilmsRepository) {}
 
-   async getAll() {
+  async getAll() {
     return this.filmsRepository.findAll();
   }
 

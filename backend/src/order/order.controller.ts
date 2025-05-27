@@ -4,9 +4,9 @@ import { GetOrderDTO } from './dto/order.dto';
 
 @Controller('order')
 export class OrderController {
-    constructor(private readonly orderService: OrderService) {}
-    @Post() 
-    getFilms(@Body() orderData: GetOrderDTO) {
+  constructor(private readonly orderService: OrderService) {}
+  @Post()
+  getFilms(@Body() orderData: GetOrderDTO) {
     return this.orderService.createOrder(orderData);
   }
 }

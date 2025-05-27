@@ -4,12 +4,12 @@ import { FilmsService } from './films.service';
 @Controller('films')
 export class FilmsController {
   constructor(private readonly filmsService: FilmsService) {}
-  @Get() 
+  @Get()
   getFilms() {
     return this.filmsService.getAll();
   }
 
-  @Get(':id/schedule')
+  @Get('/:id/schedule')
   getSchedule(@Param('id') id: string) {
     return this.filmsService.getScheduleFilm(id);
   }
