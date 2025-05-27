@@ -43,7 +43,6 @@ export class FilmsRepository {
     try {
       const film = await this.filmModel.findOne({ id: id });
       return this.getFilm()(film);
-      return film;
     } catch {
       throw new NotFoundException(`Фильм с id ${id} отсутствует в БД`);
     }
@@ -56,7 +55,7 @@ export class FilmsRepository {
   ): Promise<void> {
     try {
       await this.filmModel.updateOne(
-        { _id: filmId },
+        { id: filmId },
         { $push: { [`schedule.${sessionIndex}.taken`]: place } },
       );
     } catch (error) {

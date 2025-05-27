@@ -18,13 +18,13 @@ export class OrderService {
         (s) => s.id === ticket.session,
       );
       if (scheduleIndex === -1) {
-        throw new NotFoundException(`Неn расписания с id '${ticket.session}'`);
+        throw new NotFoundException(`Нет расписания с id '${ticket.session}'`);
       }
       const place = `${ticket.row}:${ticket.seat}`;
       if (film.schedule[scheduleIndex].taken.includes(place)) {
         throw new BadRequestException(`Место уже занято`);
       }
-      this.filmsRepository.takingSeat(
+      await this.filmsRepository.takingSeat(
         ticket.film,
         scheduleIndex.toString(),
         place,
