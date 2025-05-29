@@ -12,15 +12,15 @@ import { Film as FilmEntity } from '../films/entities/film.entity';
 
 @Module({})
 export class DatabaseModule {
-  static register(appconfig: AppConfig): DynamicModule {
+  static register(appConfig: AppConfig): DynamicModule {
     const imports = [];
     const providers = [];
     const exports = [];
 
-    switch (appconfig.database.driver) {
+    switch (appConfig.database.driver) {
       case 'mongodb':
         imports.push(
-          MongooseModule.forRoot(appconfig.database.url),
+          MongooseModule.forRoot(appConfig.database.url),
           MongooseModule.forFeature([{ name: Film.name, schema: FilmSchema }]),
         );
         providers.push({
@@ -35,11 +35,11 @@ export class DatabaseModule {
         imports.push(
           TypeOrmModule.forRoot({
             type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres',
-            password: 'postgres',
-            database: 'prac',
+            host: appConfig.database.host,
+            port: appConfig.database.port,
+            username: appConfig.database.username,
+            password: appConfig.database.password,
+            database: appConfig.database.database,
             entities: [FilmEntity, ScheduleEntity],
             synchronize: false,
           }),

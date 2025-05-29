@@ -24,7 +24,7 @@ export class OrderService {
       if (scheduleDto.taken.includes(place)) {
         throw new BadRequestException(`Место уже занято`);
       }
-       this.filmsRepository.takingSeat(ticket.film, scheduleDto.id, place);
+       await this.filmsRepository.takingSeat(ticket.film, scheduleDto.id, place);
     }
     return { total: tickets.length, items: tickets };
   }
