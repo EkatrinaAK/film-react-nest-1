@@ -21,7 +21,7 @@ import { DatabaseModule } from './database/database.module';
       rootPath: path.join(__dirname, '..', 'public'),
       renderPath: '/content/afisha/',
     }),
-    DatabaseModule.register(),
+    DatabaseModule.register(configProvider.useValue),
   ],
   controllers: [FilmsController, OrderController],
   providers: [configProvider, FilmsService, OrderService],
