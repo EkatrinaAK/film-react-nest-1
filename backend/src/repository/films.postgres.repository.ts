@@ -71,7 +71,7 @@ export class FilmsPostgresRepository implements FilmsRepository {
         schedule.taken.trim().length === 0
           ? place
           : schedule.taken + `,${place}`;
-      this.filmsRepository.save(schedule);
+      this.scheduleRepository.save(schedule);
     } catch {
       throw new ConflictException('При бронировании места произошли ошибки');
     }
