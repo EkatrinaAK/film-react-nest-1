@@ -27,8 +27,9 @@ export class Schedule {
   @IsNumber()
   price: number;
 
-  @Column('text', { array: true, default: [] })
-  taken: string[];
+  @Column()
+  @IsString()
+  taken: string;
 
   @Column()
   @IsString()
