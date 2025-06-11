@@ -8,7 +8,12 @@ export const configProvider = {
     //TODO прочесть переменнные среды
     database: {
       driver: applicationConfig.DATABASE_DRIVER,
-      url: applicationConfig.DATABASE_URL,
+      url: applicationConfig.DATABASE_URL || 'postgresql://localhost',
+      host: applicationConfig.DATABASE_HOST || 'postgres',
+      port: applicationConfig.DATABASE_PORT || 5432,
+      username: applicationConfig.DATABASE_USERNAME || 'prac',
+      password: applicationConfig.DATABASE_PASSWORD || 'prac',
+      database: applicationConfig.DATABASE_NAME || 'prac',
     },
   },
 };
@@ -20,4 +25,9 @@ export interface AppConfig {
 export interface AppConfigDatabase {
   driver: string;
   url: string;
+  host: string;
+  port: number;
+  username: string;
+  password: string;
+  database: string;
 }
