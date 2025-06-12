@@ -15,6 +15,7 @@ export const configProvider = {
       password: applicationConfig.DATABASE_PASSWORD || 'prac',
       database: applicationConfig.DATABASE_NAME || 'prac',
     },
+    logger: applicationConfig.LOGGER || 'DEV',
   },
 };
 
