@@ -2,7 +2,7 @@ import { Injectable, LoggerService } from '@nestjs/common';
 
 @Injectable()
 export class TskvLogger implements LoggerService {
-  formatMessage(level: string, message: any, ...optionalParams: any[]) {
+  formatMessage(level: string, message: any, optionalParams: any[]) {
     return `level=${level}\tmessage=${message}\toptionalParams=${optionalParams}\n`;
   }
 
