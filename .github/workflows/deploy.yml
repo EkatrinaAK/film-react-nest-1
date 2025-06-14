@@ -1,5 +1,4 @@
-name: Tests 14 sprint
-
+name: Deploy
 on:
   push:
     branches:
@@ -7,7 +6,7 @@ on:
     tags:
       - "**"
 jobs:
-  test_backend:
+  deploy_backend:
     runs-on: ubuntu-latest
     steps:
       - name: Set up GitHub Actions
