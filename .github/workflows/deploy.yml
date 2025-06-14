@@ -17,4 +17,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./backend
-          dockerfile: ./backend/Dockerfile
+          push: true
