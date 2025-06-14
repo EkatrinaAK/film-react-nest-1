@@ -68,7 +68,7 @@ describe('FilmsController', () => {
       .overrideProvider(FilmsService)
       .useValue({
         getAll: jest.fn().mockResolvedValue(testFilms),
-        getFilmSchedule: jest.fn().mockResolvedValue({
+        getScheduleFilm: jest.fn().mockResolvedValue({
           total: testSchedules.length,
           items: testSchedules,
         }),
@@ -90,7 +90,7 @@ describe('FilmsController', () => {
     expect(service.getAll).toHaveBeenCalled();
   });
 
-  it('.getFilmSchedule() should get schedules by film', async () => {
+  it('.getchedule() should get schedules by film', async () => {
     const result = await controller.getSchedule(testFilms[0].id);
     expect(service.getScheduleFilm).toHaveBeenCalledWith(testFilms[0].id);
     expect(result).toEqual({

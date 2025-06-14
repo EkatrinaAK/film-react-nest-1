@@ -9,18 +9,18 @@ describe('OrderController', () => {
   const testData = {
     tickets: [
       {
-        film: '0e33c7f6-27a7-4aa0-8e61-65d7e5effecf',
-        session: '0cf8b68c-fcf2-4c0a-97ba-45990231fa0e',
-        daytime: '2025-02-03',
-        day: 'Monday',
-        time: '12:00',
-        row: 1,
-        seat: 1,
-        price: 350,
+        "film": "0e33c7f6-27a7-4aa0-8e61-65d7e5effecf",
+        "session": "5beec101-acbb-4158-adc6-d855716b44a8",
+        "daytime": "2024-06-28T14:00:53+03:00",
+        "day": "28 июня",
+        "time": "14:00",
+        "row": 1,
+        "seat": 1,
+        "price": 350
       },
     ],
-    email: 'test@mail.ru',
-    phone: '+79000000000',
+    email: 'ekaterina.kuznetz@yandex.ru',
+    phone: '+79233552539',
   };
 
   beforeEach(async () => {
@@ -30,7 +30,7 @@ describe('OrderController', () => {
     })
       .overrideProvider(OrderService)
       .useValue({
-        create: jest.fn().mockResolvedValue({
+        createOrder: jest.fn().mockResolvedValue({
           total: testData.tickets.length,
           items: testData.tickets,
         }),
@@ -46,7 +46,7 @@ describe('OrderController', () => {
     expect(service).toBeDefined();
   });
 
-  it('.createOrder() shold create order and return result', async () => {
+  it('.getFilms() shold create order and return result', async () => {
     const result = await controller.getFilms(testData);
     expect(result).toEqual({
       total: testData.tickets.length,
