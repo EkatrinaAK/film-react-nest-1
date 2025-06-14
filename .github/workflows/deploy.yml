@@ -1,0 +1,16 @@
+name: Tests 14 sprint
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
+jobs:
+  test_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up GitHub Actions
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
