@@ -7,7 +7,7 @@ on: [push]
 jobs:
   deploy_backend:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    
     steps:
       - uses: actions/checkout@v4 # Checking out the repo
       - name: Log in to the Container registry
@@ -31,7 +31,7 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ github.repository }}/backend:latest
           labels: ${{ steps.meta.outputs.labels }}  
-          
+
       - name: Build and push frontend Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
