@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ghcr.io/ekatrinaak/film-react-nest/backend:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/backend:latest
     container_name: backend
     depends_on:
       - postgres
@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: ghcr.io/ekatrinaak/film-react-nest/frontend:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/frontend:latest
     container_name: frontend
     networks:
       - postgres-network
