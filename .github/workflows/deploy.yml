@@ -6,6 +6,7 @@ name: Deploy
 on: [push]
 jobs:
   deploy_backend:
+    permissions: write-all
     runs-on: ubuntu-latest
     
     steps:
@@ -29,7 +30,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/ekatrinaak/backend:latest
+          tags: ${{ env.REGISTRY }}/ekatrinaak/film-react-nest-1/backend:latest
           labels: ${{ steps.meta.outputs.labels }}  
 
       - name: Build and push frontend Docker image
@@ -38,7 +39,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/ekatrinaak/frontend:latest
+          tags: ${{ env.REGISTRY }}/ekatrinaak/film-react-nest-1/frontend:latest
           labels: ${{ steps.meta.outputs.labels }}          
           
 
