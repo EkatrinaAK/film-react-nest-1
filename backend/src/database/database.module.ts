@@ -1,6 +1,5 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { applicationConfig } from '../app.config.provider';
 import { Film, FilmSchema } from '../films/schemas/film.schema';
 import { AppConfig } from '../app.config.provider';
 import { FilmsMongoRepository } from '../repository/films.mongo.repository';

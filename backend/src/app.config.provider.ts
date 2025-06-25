@@ -7,12 +7,12 @@ export const configProvider = {
   useValue: <AppConfig>{
     //TODO прочесть переменнные среды
     database: {
-      driver: applicationConfig.DATABASE_DRIVER,
+      driver: applicationConfig.DATABASE_DRIVER || 'postgres',
       url: applicationConfig.DATABASE_URL || 'postgresql://localhost',
       host: applicationConfig.DATABASE_HOST || 'postgres',
       port: applicationConfig.DATABASE_PORT || 5432,
-      username: applicationConfig.DATABASE_USERNAME || 'prac',
-      password: applicationConfig.DATABASE_PASSWORD || 'prac',
+      username: applicationConfig.DATABASE_USERNAME || 'postgres',
+      password: applicationConfig.DATABASE_PASSWORD || 'postgres',
       database: applicationConfig.DATABASE_NAME || 'prac',
     },
     logger: applicationConfig.LOGGER || 'DEV',
@@ -21,6 +21,7 @@ export const configProvider = {
 
 export interface AppConfig {
   database: AppConfigDatabase;
+  logger: 'DEV' | 'JSON' | 'TSKV';
 }
 
 export interface AppConfigDatabase {

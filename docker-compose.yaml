@@ -18,12 +18,12 @@ services:
     networks:
       - webnet
     volumes:
-      - frontend-dist:/usr/src/app/dist
+      - frontend-dist:/app/dist
     env_file:
       - frontend/.env
 
   postgres:
-    image: postgres:16
+    image: postgres:16.4
     container_name: postgres
     ports:
       - 5432:5432

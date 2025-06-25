@@ -8,6 +8,7 @@ services:
       - postgres-network
     environment:
       - DATABASE_HOST=postgres
+      - DATABASE_URL="postgresql://localhost"
     env_file:
       - backend/.env
     restart: unless-stopped
@@ -18,17 +19,19 @@ services:
     networks:
     - postgres-network
     volumes:
-      - frontend-dist:/usr/src/app/dist
+      - frontend-dist:/app/dist
     env_file:
       - frontend/.env
 
   postgres:
-    image: postgres:16
+    image: postgres:16.4
     container_name: postgres
     environment:
       - POSTGRES_DB=prac
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
     networks:
       - postgres-network
     volumes:
