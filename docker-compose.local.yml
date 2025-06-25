@@ -19,7 +19,7 @@ services:
     networks:
     - postgres-network
     volumes:
-      - frontend-dist:/app/dist
+      - frontend-dist:/usr/src/app/dist
     env_file:
       - frontend/.env
 
