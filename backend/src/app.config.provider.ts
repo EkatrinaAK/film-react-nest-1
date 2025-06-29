@@ -9,7 +9,7 @@ export const configProvider = {
     database: {
       driver: applicationConfig.DATABASE_DRIVER || 'postgres',
       url: applicationConfig.DATABASE_URL || 'postgresql://localhost',
-      host: applicationConfig.DATABASE_HOST || 'postgres',
+      host: applicationConfig.DATABASE_HOST || 'localhost',
       port: applicationConfig.DATABASE_PORT || 5432,
       username: applicationConfig.DATABASE_USERNAME || 'postgres',
       password: applicationConfig.DATABASE_PASSWORD || 'postgres',
