@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: ghcr.io/ekatrinaak/frontend:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
       - app-network
 
   backend:
-    image: ghcr.io/ekatrinaak/backend:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -26,7 +26,7 @@ services:
       - app-network
 
   nginx:
-    image: ghcr.io/ekatrinaak/nginx:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/nginx:latest
     build:
       context: ./nginx
     ports:

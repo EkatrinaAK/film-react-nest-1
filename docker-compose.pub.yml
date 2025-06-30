@@ -1,6 +1,6 @@
-ervices:
+services:
   frontend:
-    image: ghcr.io/ekatrinaak/frontend:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/frontend:latest
     volumes:
       - frontend-dist:/usr/share/nginx/html
     env_file:
@@ -11,7 +11,7 @@ ervices:
       - app-network
 
   backend:
-    image: ghcr.io/ekatrinaak/backend:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/backend:latest
     env_file:
       - backend/.env
     depends_on:
@@ -20,7 +20,7 @@ ervices:
       - app-network
 
   nginx:
-    image: ghcr.io/ekatrinaak/nginx:latest
+    image: ghcr.io/ekatrinaak/film-react-nest-1/nginx:latest
     ports:
       - "80:80"
     volumes:
