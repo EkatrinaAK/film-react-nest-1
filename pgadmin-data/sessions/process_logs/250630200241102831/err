@@ -1,0 +1,116 @@
+250630200241254290,pg_dump: last built-in OID is 16383
+
+250630200241255238,pg_dump: reading extensions
+
+250630200241255592,pg_dump: identifying extension members
+
+250630200241256120,pg_dump: reading schemas
+
+250630200241256282,pg_dump: reading user-defined tables
+
+250630200241259401,pg_dump: reading user-defined functions
+
+250630200241262667,pg_dump: reading user-defined types
+
+250630200241264272,pg_dump: reading procedural languages
+
+250630200241264543,pg_dump: reading user-defined aggregate functions
+
+250630200241264957,pg_dump: reading user-defined operators
+
+250630200241265554,pg_dump: reading user-defined access methods
+
+250630200241265795,pg_dump: reading user-defined operator classes
+
+250630200241266052,pg_dump: reading user-defined operator families
+
+250630200241266322,pg_dump: reading user-defined text search parsers
+
+250630200241266556,pg_dump: reading user-defined text search templates
+
+250630200241266759,pg_dump: reading user-defined text search dictionaries
+
+250630200241266977,pg_dump: reading user-defined text search configurations
+
+250630200241267172,pg_dump: reading user-defined foreign-data wrappers
+
+250630200241267467,pg_dump: reading user-defined foreign servers
+
+250630200241267661,pg_dump: reading default privileges
+
+250630200241267857,pg_dump: reading user-defined collations
+
+250630200241268495,pg_dump: reading user-defined conversions
+
+250630200241268768,pg_dump: reading type casts
+
+250630200241269256,pg_dump: reading transforms
+
+250630200241269465,pg_dump: reading table inheritance information
+
+250630200241269627,pg_dump: reading event triggers
+
+250630200241269799,pg_dump: finding extension tables
+
+250630200241270083,pg_dump: finding inheritance relationships
+
+250630200241270230,pg_dump: reading column info for interesting tables
+
+250630200241270619,pg_dump: finding table default expressions
+
+250630200241270907,pg_dump: flagging inherited columns in subtables
+
+250630200241271056,pg_dump: reading partitioning data
+
+250630200241271266,pg_dump: reading indexes
+
+250630200241272524,pg_dump: flagging indexes in partitioned tables
+
+250630200241272754,pg_dump: reading extended statistics
+
+250630200241273003,pg_dump: reading constraints
+
+250630200241273186,pg_dump: reading triggers
+
+250630200241273379,pg_dump: reading rewrite rules
+
+250630200241273554,pg_dump: reading policies
+
+250630200241273732,pg_dump: reading row-level security policies
+
+250630200241273924,pg_dump: reading publications
+
+250630200241274100,pg_dump: reading publication membership of tables
+
+250630200241274274,pg_dump: reading publication membership of schemas
+
+250630200241274458,pg_dump: reading subscriptions
+
+250630200241275303,pg_dump: reading large objects
+
+250630200241275465,pg_dump: reading dependency data
+
+250630200241283064,pg_dump: saving encoding = UTF8
+
+250630200241283283,pg_dump: saving standard_conforming_strings = on
+
+250630200241283445,pg_dump: saving search_path = 
+
+250630200241283883,pg_dump: creating EXTENSION "uuid-ossp"
+
+250630200241284122,pg_dump: creating COMMENT "EXTENSION "uuid-ossp""
+
+250630200241284288,pg_dump: creating TABLE "public.films"
+
+250630200241284487,pg_dump: creating TABLE "public.schedules"
+
+250630200241284707,pg_dump: processing data for table "public.films"
+
+250630200241284973,pg_dump: processing data for table "public.schedules"
+
+250630200241285550,pg_dump: creating CONSTRAINT "public.films PK_697487ada088902377482c970d1"
+
+250630200241286585,pg_dump: creating CONSTRAINT "public.schedules PK_7e33fc2ea755a5765e3564e66dd"
+
+250630200241286773,pg_dump: creating FK CONSTRAINT "public.schedules FK_1c2f5e637713a429f4854024a76"
+

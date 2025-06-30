@@ -1,0 +1,70 @@
+ervices:
+  frontend:
+    image: ghcr.io/ekatrinaak/frontend:latest
+    volumes:
+      - frontend-dist:/usr/share/nginx/html
+    env_file:
+      - frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    image: ghcr.io/ekatrinaak/backend:latest
+    env_file:
+      - backend/.env
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+  nginx:
+    image: ghcr.io/ekatrinaak/nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - frontend-dist:/usr/share/nginx/html
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:16.4
+    environment:
+      - POSTGRES_DB=prac
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    networks:
+      - app-network
+
+volumes:
+  frontend-dist:
+  postgres-data:
+  pgadmin-data:
+
+networks:
+  app-network:
+    driver: bridge
