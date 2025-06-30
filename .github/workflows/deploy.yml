@@ -6,7 +6,9 @@ name: Deploy
 on: [push]
 jobs:
   deploy_backend:
-    permissions: write-all
+    permissions: 
+      packages: write
+      contents: read  
     runs-on: ubuntu-latest
     
     steps:
