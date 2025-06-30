@@ -42,10 +42,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=prac
+      - POSTGRES_DB=postgres  
+      - DATABASE_USERNAME=postgres 
+      - DATABASE_PASSWORD=postgres  
+      - DATABASE_NAME=prac 
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
@@ -66,7 +66,7 @@ services:
       - postgres
     volumes:
       - ./pgadmin-data:/var/lib/pgadmin
-
+     
     networks:
       - app-network
 
