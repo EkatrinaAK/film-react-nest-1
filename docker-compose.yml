@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - frontend-dist:/usr/share/nginx/html
+    env_file:
+      - frontend/.env
     depends_on:
       - backend
     networks:
@@ -16,8 +18,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    environment:
-      - DATABASE_URL=postgresql://localhost
+    env_file:
+      - backend/.env
     depends_on:
       - postgres
     networks:
@@ -40,12 +42,9 @@ services:
   postgres:
     image: postgres:16.4
     environment:
+      - POSTGRES_DB=prac
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres  
-      - DATABASE_USERNAME=postgres 
-      - DATABASE_PASSWORD=postgres  
-      - DATABASE_NAME=prac 
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
@@ -66,7 +65,6 @@ services:
       - postgres
     volumes:
       - ./pgadmin-data:/var/lib/pgadmin
-     
     networks:
       - app-network
 
@@ -74,7 +72,6 @@ volumes:
   frontend-dist:
   postgres-data:
   pgadmin-data:
-
 
 networks:
   app-network:
