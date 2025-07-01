@@ -18,10 +18,18 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    environment:
+      - DATABASE_HOST=postgres
     env_file:
       - backend/.env
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/afisha/films"]  # Проверка, что бэкенд запущен
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - app-network
 
@@ -41,16 +49,25 @@ services:
 
   postgres:
     image: postgres:16.4
+    platform: linux/amd64 
     environment:
-      - POSTGRES_DB=prac
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - DATABASE_NAME=prac
+      - DATABASE_USERNAME=postgres 
+      - DATABASE_PASSWORD=postgres 
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./docker-entrypoint/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
@@ -72,6 +89,7 @@ volumes:
   frontend-dist:
   postgres-data:
   pgadmin-data:
+
 
 networks:
   app-network:

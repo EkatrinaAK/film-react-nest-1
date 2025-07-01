@@ -41,6 +41,8 @@ export class DatabaseModule {
             database: appConfig.database.database,
             entities: [FilmEntity, ScheduleEntity],
             synchronize: false,
+            retryAttempts: 10,      
+            retryDelay: 3000,  
           }),
           TypeOrmModule.forFeature([FilmEntity, ScheduleEntity]),
         );
