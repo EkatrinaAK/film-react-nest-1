@@ -4,20 +4,22 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    volumes:
-      - frontend-dist:/usr/share/nginx/html
     env_file:
       - frontend/.env
     depends_on:
       - backend
     networks:
       - app-network
+    ports:
+      - "80:80"
 
   backend:
     image: ghcr.io/ekatrinaak/film-react-nest-1/backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
     environment:
       - DATABASE_HOST=postgres
     env_file:
@@ -26,36 +28,22 @@ services:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/afisha/films"]  # Проверка, что бэкенд запущен
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/afisha/films" ] # Проверка, что бэкенд запущен
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
       - app-network
 
-  nginx:
-    image: ghcr.io/ekatrinaak/film-react-nest-1/nginx:latest
-    build:
-      context: ./nginx
-    ports:
-      - "80:80"
-    volumes:
-      - frontend-dist:/usr/share/nginx/html
-    depends_on:
-      - frontend
-      - backend
-    networks:
-      - app-network
-
   postgres:
     image: postgres:16.4
-    platform: linux/amd64 
+    platform: linux/amd64
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - DATABASE_NAME=prac
-      - DATABASE_USERNAME=postgres 
-      - DATABASE_PASSWORD=postgres 
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./docker-entrypoint/:/docker-entrypoint-initdb.d/
@@ -64,7 +52,7 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5

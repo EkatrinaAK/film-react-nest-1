@@ -6,14 +6,13 @@ import { TskvLogger } from './middlewares/tskv.logger';
 import { DevLogger } from './middlewares/dev.logger';
 import { JsonLogger } from './middlewares/json.logger';
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     bufferLogs: true,
   });
-  
+  console.log('11111');
   app.useGlobalPipes(new ValidationPipe());
-  app.setGlobalPrefix('api/afisha');
+  app.setGlobalPrefix('/api/afisha');
   app.enableCors({ origin: '*' });
 
   const appConfig = app.get('CONFIG');
