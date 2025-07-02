@@ -1,0 +1,78 @@
+services:
+  frontend:
+    image: ghcr.io/ekatrinaak/film-react-nest-1/frontend:latest
+    volumes:
+      - frontend-dist:/usr/share/nginx/html
+    env_file:
+      - frontend/.env
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+  backend:
+    image: ghcr.io/ekatrinaak/film-react-nest-1/backend:latest
+    environment:
+      - DATABASE_HOST=postgres
+    env_file:
+      - backend/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/afisha/films" ] # Проверка, что бэкенд запущен
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:16.4
+    platform: linux/amd64
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DATABASE_NAME=prac
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker-entrypoint/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - app-network
+    
+volumes:
+  frontend-dist:
+  postgres-data:
+  pgadmin-data:
+
+
+networks:
+  app-network:
+    driver: bridge

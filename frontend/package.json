@@ -5,15 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "component": "sh ./bin/copy.sh Component src/components"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-arm64": "^4.41.1"
+  },
   "dependencies": {
-    "@rollup/rollup-darwin-arm64": "^4.41.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.11",
     "react": "^18.3.1",

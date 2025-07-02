@@ -1,6 +1,5 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { applicationConfig } from '../app.config.provider';
 import { Film, FilmSchema } from '../films/schemas/film.schema';
 import { AppConfig } from '../app.config.provider';
 import { FilmsMongoRepository } from '../repository/films.mongo.repository';
@@ -42,6 +41,8 @@ export class DatabaseModule {
             database: appConfig.database.database,
             entities: [FilmEntity, ScheduleEntity],
             synchronize: false,
+            retryAttempts: 10,      
+            retryDelay: 3000,  
           }),
           TypeOrmModule.forFeature([FilmEntity, ScheduleEntity]),
         );

@@ -33,7 +33,7 @@
     }
 
     &::placeholder {
-      color: lighten($primaryLight, 23%);
+      color: adjust($primaryLight, 23%);
     }
   }
 }
