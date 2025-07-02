@@ -69,9 +69,18 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./pgadmin-data:/var/lib/pgadmin
+      - pgadmin-data:/var/lib/pgadmin
     networks:
       - app-network
+
+  certbot:
+    image: certbot/certbot:latest
+    networks:
+      - app-network
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+
 
 volumes:
   frontend-dist:
